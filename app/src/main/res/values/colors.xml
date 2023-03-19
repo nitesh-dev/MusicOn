@@ -12,15 +12,15 @@
 <!-- Common colors across themes   -->
     <color name="white">#FFFFFFFF</color>
     <color name="black">#050505</color>
-    <color name="black_100">#F1F1F1</color>
 
 
     <!-- Pink theme color - default   -->
     <color name="pink_900">#A90753</color>
     <color name="pink_700">#E83E8E</color>
+    <color name="pink_200">#FFE7F3</color>
+    <color name="pink_100">#FFEFF7</color>
     <color name="black_800">#212121</color>
-    <color name="pink_300">#FFF3F9</color>
-    <color name="pink_100">#FFFBFD</color>
+    <color name="black_100">#F1F1F1</color>
 
     <!-- Blue theme color  -->
 

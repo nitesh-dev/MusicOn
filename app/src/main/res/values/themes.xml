@@ -20,11 +20,11 @@
 
 
     <style name="Theme_pink" parent="Theme.MusicOn">
-        <item name="colorPrimary">@color/pink_700</item>
+        <item name="colorPrimary">@color/pink_100</item>
 
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/pink_900</item>
+        <item name="android:statusBarColor">@color/pink_100</item>
     </style>
 
     <style name="Theme_blue" parent="Theme.MusicOn">
