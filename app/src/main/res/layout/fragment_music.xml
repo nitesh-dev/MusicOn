@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     tools:context=".fragments.MusicFragment">
 
     <!-- AppBar layout for using Toolbar as AppBar -->
@@ -24,28 +25,155 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
+                android:background="?attr/colorPrimarySurface"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="#00FFFFFF"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/icon_arrow_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/toolbar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorOnPrimary" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="My Music playlist"
+                android:textColor="?attr/colorSecondaryVariant"
+                android:textSize="@dimen/title_bar_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/toolbar"
+                app:layout_constraintStart_toEndOf="@+id/imageButton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:background="@drawable/top_rounded_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <SeekBar
+            android:id="@+id/seekBar3"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:max="1000"
+            android:progress="300"
+            android:progressBackgroundTint="?attr/colorSecondaryVariant"
+            android:progressTint="?attr/colorSecondary"
+            android:thumbTint="?attr/colorSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playCard" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/playCard"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:backgroundTint="?attr/colorSecondary"
+            app:cardBackgroundColor="#FF0101"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="20dp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.26999998">
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="2dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/icon_resume"
+                app:tint="?attr/colorOnSecondary" />
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/icon_forward"
+            app:layout_constraintBottom_toBottomOf="@+id/playCard"
+            app:layout_constraintStart_toEndOf="@+id/playCard"
+            app:layout_constraintTop_toTopOf="@+id/playCard"
+            app:tint="?attr/colorSecondary" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="24dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/icon_backward"
+            app:layout_constraintBottom_toBottomOf="@+id/playCard"
+            app:layout_constraintEnd_toStartOf="@+id/playCard"
+            app:layout_constraintTop_toTopOf="@+id/playCard"
+            app:tint="?attr/colorSecondary" />
+
+        <ImageButton
+            android:id="@+id/imageButton7"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/icon_loop"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton5"
+            app:layout_constraintTop_toTopOf="@+id/imageButton5"
+            app:tint="?attr/colorSecondary" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="30dp"
+            android:text="00:30"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/seekBar3"
+            app:layout_constraintEnd_toStartOf="@+id/seekBar3"
+            app:layout_constraintTop_toTopOf="@+id/seekBar3" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="30dp"
+            android:text="2:30"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/seekBar3"
+            app:layout_constraintStart_toEndOf="@+id/seekBar3"
+            app:layout_constraintTop_toTopOf="@+id/seekBar3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
