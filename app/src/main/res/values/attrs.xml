@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PlayMusicView">
+
+        <attr name="seekBarTrackColor" format="color" />
+        <attr name="seekBarProgressTrackColor" format="color" />
+
+    </declare-styleable>
+</resources>
