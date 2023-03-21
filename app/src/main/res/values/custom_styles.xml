@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="play_checkbox" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:background">@drawable/full_rounded_background</item>
+        <item name="android:button">@drawable/play_pause_checkbox</item>
+<!--        <item name="android:button">?attr/colorSecondary</item>-->
+
+    </style>
+</resources>
