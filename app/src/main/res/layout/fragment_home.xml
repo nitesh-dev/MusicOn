@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
     tools:context=".fragments.HomeFragment">
 
     <LinearLayout
@@ -13,61 +14,100 @@
 
         <!-- AppBar layout for using Toolbar as AppBar -->
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/home_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:elevation="0dp">
+            android:background="@color/pink_100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/colorPrimary"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="?attr/actionBarTheme"
-                    app:layout_constraintEnd_toEndOf="parent"
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/appCompatImageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/Home"
+                    android:padding="2dp"
+                    android:src="@drawable/icon_home"
+                    android:tint="@color/pink_700"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="sans-serif"
+                    android:padding="2dp"
+                    android:text="@string/Home"
+                    android:textColor="?attr/colorSecondaryVariant"
+                    android:textSize="@dimen/title_bar_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/appCompatImageButton"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <ImageButton
+                    android:id="@+id/imageButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="#00FFFFFF"
+                    android:padding="8dp"
+                    android:src="@drawable/icon_search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageButton8"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?attr/colorSecondary" />
+
+                <ImageButton
+
+                    android:id="@+id/imageButton8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="#00FFFFFF"
+                    android:padding="8dp"
+                    android:src="@drawable/icon_setting"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?attr/colorSecondary" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
 
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="8dp">
+            android:layout_gravity="center_vertical"
+            android:padding="16dp"
+            android:text="Song Playlist"
+            android:textColor="?attr/colorSecondaryVariant"
+            android:textSize="@dimen/main_heading"
+            android:textStyle="normal" />
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="Song Playlist"
-                android:textColor="?attr/colorSecondaryVariant"
-                android:textSize="@dimen/main_heading"
-                android:textStyle="normal" />
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="?attr/colorPrimary"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:paddingLeft="16dp"-->
+        <!--            android:paddingRight="16dp"-->
+        <!--            android:paddingBottom="8dp">-->
 
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00FFFFFF"
-                android:padding="8dp"
-                android:src="@drawable/icon_search"
-                app:tint="?attr/colorSecondary" />
-        </LinearLayout>
+        <!--            -->
+
+        <!--        </LinearLayout>-->
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -138,7 +178,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            tools:listitem="@layout/music_play_track_layout" >
+            tools:listitem="@layout/music_play_track_layout">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -149,7 +189,7 @@
             android:layout_gravity="center_vertical"
             android:background="?attr/colorSurface"
             android:paddingLeft="16dp"
-            android:paddingTop="24dp"
+            android:paddingTop="16dp"
             android:paddingRight="16dp"
             android:text="Local"
             android:textColor="?attr/colorSecondaryVariant"

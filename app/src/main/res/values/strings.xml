@@ -2,4 +2,6 @@
     <string name="app_name">Music On</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="demo_song_track"><b>Love me back ·</b> The Weeknd</string>
+    <string name="Home">Home</string>
+    <string name="Settings">Settings</string>
 </resources>
