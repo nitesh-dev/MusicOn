@@ -24,6 +24,7 @@
         <item name="colorOnPrimary">@color/pink_700</item>
         <item name="colorSecondary">@color/pink_700</item>
         <item name="colorOnSecondary">@color/pink_100</item>
+        <item name="colorOnSecondaryContainer">@color/pink_200</item>
         <item name="colorSecondaryVariant">@color/pink_900</item>
         <item name="colorSurface">@color/black_100</item>
         <item name="colorAccent">@color/black_400</item>

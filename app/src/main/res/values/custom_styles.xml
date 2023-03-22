@@ -6,4 +6,14 @@
 <!--        <item name="android:button">?attr/colorSecondary</item>-->
 
     </style>
+
+    <style name="CircularImageView">
+        <item name="cornerSize">30%</item>
+<!--        <item name="cornerFamily">rounded</item>-->
+    </style>
+
+    <style name="FullCircularImageView">
+        <item name="cornerSize">50%</item>
+
+    </style>
 </resources>
