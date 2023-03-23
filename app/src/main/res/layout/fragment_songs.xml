@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.SongsFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iteration_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:tint="@android:color/darker_gray"
+            android:src="@drawable/icon_random"/>
+        <TextView
+            android:id="@+id/iteration_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shuffled"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="-3dp"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+
+     <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/rv_songs"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_marginTop="10dp"
+         tools:listitem="@layout/music_play_track_layout"/>
+
+
+</LinearLayout>
