@@ -32,6 +32,7 @@ class HomeFragment : Fragment() {
 
         // use below code to navigate
         //findNavController().navigate(R.id.action_homeFragment_to_musicFragment)
+        findNavController().navigate(R.id.action_homeFragment_to_playlistFragment)
 
     }
 }
