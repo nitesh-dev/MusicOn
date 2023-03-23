@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.flaxstudio.musicon.R
+import com.flaxstudio.musicon.SettingActivity
 import com.flaxstudio.musicon.databinding.FragmentHomeBinding
 
 
@@ -32,6 +33,9 @@ class HomeFragment : Fragment() {
 
         // use below code to navigate
         //findNavController().navigate(R.id.action_homeFragment_to_musicFragment)
-
+        binding.settingsBtn.setOnClickListener {
+            val intent = Intent(activity,SettingActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
