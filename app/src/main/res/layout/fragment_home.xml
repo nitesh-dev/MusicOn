@@ -91,24 +91,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="16dp"
-            android:text="Song Playlist"
+            android:text="@string/song_playlist"
             android:textColor="?attr/colorSecondaryVariant"
             android:textSize="@dimen/main_heading"
             android:textStyle="normal" />
-
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="?attr/colorPrimary"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            android:paddingLeft="16dp"-->
-        <!--            android:paddingRight="16dp"-->
-        <!--            android:paddingBottom="8dp">-->
-
-        <!--            -->
-
-        <!--        </LinearLayout>-->
-
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -156,7 +142,8 @@
                         android:layout_marginTop="28dp"
                         android:layout_marginEnd="28dp"
                         android:layout_marginBottom="28dp"
-                        android:src="@drawable/icon_add" />
+                        android:src="@drawable/icon_add"
+                        android:contentDescription="@string/add" />
                 </RelativeLayout>
             </LinearLayout>
         </HorizontalScrollView>
@@ -170,7 +157,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Recent Played"
+            android:text="@string/recent_played"
             android:textColor="?attr/colorSecondaryVariant"
             android:textSize="@dimen/main_heading"
             android:textStyle="normal" />
@@ -191,7 +178,7 @@
             android:paddingLeft="16dp"
             android:paddingTop="16dp"
             android:paddingRight="16dp"
-            android:text="Local"
+            android:text="@string/local"
             android:textColor="?attr/colorSecondaryVariant"
             android:textSize="@dimen/main_heading"
             android:textStyle="normal" />
@@ -212,7 +199,7 @@
                 android:paddingTop="12dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="12dp"
-                android:text="Internal storage"
+                android:text="@string/internal_storage"
                 android:textColor="?attr/colorSecondaryVariant"
                 android:textSize="@dimen/text_medium" />
 
@@ -226,7 +213,7 @@
                 android:paddingTop="12dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="12dp"
-                android:text="SD card"
+                android:text="@string/sd_card"
                 android:textColor="?attr/colorSecondaryVariant"
                 android:textSize="@dimen/text_medium" />
         </LinearLayout>
