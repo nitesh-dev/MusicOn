@@ -24,8 +24,8 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/appCompatImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="21dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/Home"
                 android:padding="4dp"
@@ -110,19 +110,19 @@
 
                     <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/switch_on"
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:minWidth="22dp"
-                        android:minHeight="22dp"
-                        android:gravity="center"
-                        android:foregroundGravity="center"
-                        android:foreground="@drawable/switch_selector"
-                        android:checked="false"
-                        android:foregroundTint="?attr/colorSecondary"
-                        android:buttonTint="@android:color/transparent"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         android:layout_marginEnd="@dimen/default_margin"
+                        android:buttonTint="@android:color/transparent"
+                        android:checked="false"
+                        android:foreground="@drawable/switch_selector"
+                        android:foregroundGravity="center"
+                        android:foregroundTint="?attr/colorSecondary"
+                        android:gravity="center"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
                         tools:ignore="UnusedAttribute" />
                 </RelativeLayout>
                 <RelativeLayout
