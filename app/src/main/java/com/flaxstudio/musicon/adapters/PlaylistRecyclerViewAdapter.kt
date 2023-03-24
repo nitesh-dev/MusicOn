@@ -11,7 +11,7 @@ import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.flaxstudio.musicon.R
 
-class PlaylistRecyclerViewAdapter(private val context : Context) : RecyclerView.Adapter<PlaylistRecyclerViewAdapter.RecyclerViewViewHolder>() {
+class PlaylistRecyclerViewAdapter() : RecyclerView.Adapter<PlaylistRecyclerViewAdapter.RecyclerViewViewHolder>() {
 
     inner class RecyclerViewViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView){
         val songPoster : ImageView = itemView.findViewById(R.id.shapeableImageView)
@@ -29,11 +29,15 @@ class PlaylistRecyclerViewAdapter(private val context : Context) : RecyclerView.
     }
 
     override fun getItemCount(): Int {
+        TODO("Not yet implemented")
         return 3
     }
 
     override fun onBindViewHolder(holder: RecyclerViewViewHolder, position: Int) {
-
+        //TODO do the actual implementation of ONBind
+        holder.playlistName.text = "Chill Music"
+        holder.songDuration.text = "05:35"
+        holder.songName.text = "God's Plan"
     }
 
 }
