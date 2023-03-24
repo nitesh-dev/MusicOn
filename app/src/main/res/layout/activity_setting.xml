@@ -8,49 +8,60 @@
     tools:context=".SettingActivity">
 
     <!--  Toolbar  -->
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/home_toolbar"
-        android:layout_width="match_parent"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/pink_100"
+        app:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/appCompatImageButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/Home"
-                android:padding="4dp"
-                android:src="@drawable/icon_arrow_back"
-                android:tint="?attr/colorSecondaryVariant"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/icon_arrow_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/toolbar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorOnPrimary" />
+
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="sans-serif"
-                android:padding="2dp"
+                android:layout_marginEnd="32dp"
                 android:text="@string/Settings"
-                android:textColor="?attr/colorSecondaryVariant"
+                android:textColor="?attr/colorSecondary"
                 android:textSize="@dimen/title_bar_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/appCompatImageButton"
+                app:layout_constraintEnd_toEndOf="@+id/toolbar"
+                app:layout_constraintStart_toEndOf="@+id/imageButton"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.5" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -58,54 +69,59 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/app_bar">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:fontFamily="sans-serif"
                 android:padding="8dp"
                 android:text="@string/general"
                 android:textColor="?attr/colorSecondaryVariant"
                 android:textSize="@dimen/main_heading"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:orientation="vertical"
                         android:layout_marginStart="@dimen/default_margin"
+                        android:orientation="vertical"
                         tools:ignore="RelativeOverlap">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:fontFamily="sans-serif"
-                            android:text="@string/auto_play"
                             android:paddingHorizontal="16dp"
+                            android:text="@string/auto_play"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_big"/>
+                            android:textSize="@dimen/text_big" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:fontFamily="sans-serif"
+
                             android:text="@string/enb_dis"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_small"/>
+                            android:textSize="@dimen/text_small" />
                     </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatCheckBox
@@ -125,17 +141,20 @@
                         android:minHeight="48dp"
                         tools:ignore="UnusedAttribute" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:orientation="vertical"
                         android:layout_marginStart="@dimen/default_margin"
+                        android:orientation="vertical"
                         tools:ignore="RelativeOverlap">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -144,7 +163,8 @@
                             android:paddingHorizontal="16dp"
                             android:text="@string/themes"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_big"/>
+                            android:textSize="@dimen/text_big" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -152,7 +172,7 @@
                             android:fontFamily="sans-serif"
                             android:text="@string/theme"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_small"/>
+                            android:textSize="@dimen/text_small" />
                     </LinearLayout>
 
                     <ImageView
@@ -165,31 +185,36 @@
                         android:src="?attr/colorSecondary" />
                 </RelativeLayout>
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/default_margin"
-                android:text="@string/help_us"
+                android:layout_marginStart="@dimen/default_margin"
 
+                android:text="@string/help_us"
                 android:textColor="?attr/colorSecondaryVariant"
-                android:textStyle="bold"
                 android:textSize="@dimen/text_big"
-                android:layout_marginStart="@dimen/default_margin"/>
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:id="@+id/container_share"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:orientation="vertical"
                         android:layout_marginStart="@dimen/default_margin"
+                        android:orientation="vertical"
                         tools:ignore="RelativeOverlap">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -198,7 +223,8 @@
                             android:paddingHorizontal="16dp"
                             android:text="@string/share"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_big"/>
+                            android:textSize="@dimen/text_big" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -206,31 +232,34 @@
                             android:fontFamily="sans-serif"
                             android:text="@string/sharapp"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_small"/>
+                            android:textSize="@dimen/text_small" />
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="4dp"
-                        android:src="@drawable/icon_arrow_right"
                         android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         android:layout_marginEnd="@dimen/default_margin"
                         android:contentDescription="@string/Settings"
+                        android:padding="4dp"
+                        android:src="@drawable/icon_arrow_right"
                         app:tint="?attr/colorSecondary" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:orientation="vertical"
                         android:layout_marginStart="@dimen/default_margin"
+                        android:orientation="vertical"
                         tools:ignore="RelativeOverlap">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -239,7 +268,8 @@
                             android:paddingHorizontal="16dp"
                             android:text="@string/rate"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_big"/>
+                            android:textSize="@dimen/text_big" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -247,31 +277,34 @@
                             android:fontFamily="sans-serif"
                             android:text="@string/rate_it"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_small"/>
+                            android:textSize="@dimen/text_small" />
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="4dp"
-                        android:src="@drawable/icon_arrow_right"
                         android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         android:layout_marginEnd="@dimen/default_margin"
                         android:contentDescription="@string/Settings"
+                        android:padding="4dp"
+                        android:src="@drawable/icon_arrow_right"
                         app:tint="?attr/colorSecondary" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:orientation="vertical"
                         android:layout_marginStart="@dimen/default_margin"
+                        android:orientation="vertical"
                         tools:ignore="RelativeOverlap">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -280,7 +313,8 @@
                             android:paddingHorizontal="16dp"
                             android:text="@string/feedback"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_big"/>
+                            android:textSize="@dimen/text_big" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -288,18 +322,18 @@
                             android:fontFamily="sans-serif"
                             android:text="@string/feedbacks"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_small"/>
+                            android:textSize="@dimen/text_small" />
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="4dp"
-                        android:src="@drawable/icon_arrow_right"
                         android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         android:layout_marginEnd="@dimen/default_margin"
                         android:contentDescription="@string/Settings"
+                        android:padding="4dp"
+                        android:src="@drawable/icon_arrow_right"
                         app:tint="?attr/colorSecondary" />
                 </RelativeLayout>
             </LinearLayout>
@@ -307,29 +341,33 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="4dp"
                 android:fontFamily="sans-serif"
                 android:padding="8dp"
-                android:layout_marginStart="@dimen/default_margin"
                 android:text="@string/more"
                 android:textColor="?attr/colorSecondaryVariant"
                 android:textSize="@dimen/main_heading"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:id="@+id/privacyPolicy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:orientation="vertical"
                         android:layout_marginStart="@dimen/default_margin"
+                        android:orientation="vertical"
                         tools:ignore="RelativeOverlap">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -338,7 +376,7 @@
                             android:paddingHorizontal="16dp"
                             android:text="@string/privacy"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_big"/>
+                            android:textSize="@dimen/text_big" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -353,24 +391,26 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="4dp"
-                        android:src="@drawable/icon_arrow_right"
                         android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         android:layout_marginEnd="@dimen/default_margin"
                         android:contentDescription="@string/Settings"
+                        android:padding="4dp"
+                        android:src="@drawable/icon_arrow_right"
                         app:tint="?attr/colorSecondary" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:orientation="vertical"
                         android:layout_marginStart="@dimen/default_margin"
+                        android:orientation="vertical"
                         tools:ignore="RelativeOverlap">
 
                         <TextView
@@ -382,6 +422,7 @@
                             android:text="@string/more_apps"
                             android:textColor="?attr/colorSecondaryVariant"
                             android:textSize="@dimen/text_big" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -389,30 +430,32 @@
                             android:fontFamily="sans-serif"
                             android:text="@string/sees"
                             android:textColor="?attr/colorSecondaryVariant"
-                            android:textSize="@dimen/text_small"/>
+                            android:textSize="@dimen/text_small" />
                     </LinearLayout>
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="4dp"
-                        android:src="@drawable/icon_arrow_right"
                         android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         android:layout_marginEnd="@dimen/default_margin"
                         android:contentDescription="@string/Settings"
+                        android:padding="4dp"
+                        android:src="@drawable/icon_arrow_right"
                         app:tint="?attr/colorSecondary" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
-                        android:orientation="vertical"
                         android:layout_marginStart="@dimen/default_margin"
+                        android:orientation="vertical"
                         tools:ignore="RelativeOverlap">
 
                         <TextView
@@ -429,12 +472,12 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="4dp"
-                        android:src="@drawable/icon_arrow_right"
                         android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         android:layout_marginEnd="@dimen/default_margin"
                         android:contentDescription="@string/Settings"
+                        android:padding="4dp"
+                        android:src="@drawable/icon_arrow_right"
                         app:tint="?attr/colorSecondary" />
                 </RelativeLayout>
             </LinearLayout>
