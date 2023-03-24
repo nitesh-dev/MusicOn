@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
         findNavController().navigate(R.id.action_homeFragment_to_musicFragment)
         // findNavController().navigate(R.id.action_homeFragment_to_playlistFragment)
 
-
+        // Use to navigate from fragment to activity.
         binding.settingsBtn.setOnClickListener {
             val intent = Intent(activity,SettingActivity::class.java)
             startActivity(intent)
