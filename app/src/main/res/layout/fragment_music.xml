@@ -34,14 +34,10 @@
 
             <ImageButton
                 android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:background="#00FFFFFF"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="8dp"
                 android:src="@drawable/icon_arrow_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/toolbar"
@@ -54,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:text="My Music playlist"
-                android:textColor="?attr/colorSecondaryVariant"
+                android:textColor="?attr/colorSecondary"
                 android:textSize="@dimen/title_bar_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/toolbar"
@@ -72,14 +68,15 @@
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:background="@drawable/top_rounded_background"
+        android:backgroundTint="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
 
         <SeekBar
-            android:id="@+id/seekBar3"
-            android:layout_width="250dp"
+            android:id="@+id/music_seekBar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:max="1000"
@@ -87,8 +84,9 @@
             android:progressBackgroundTint="?attr/colorSecondaryVariant"
             android:progressTint="?attr/colorSecondary"
             android:thumbTint="?attr/colorSecondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/playCard" />
 
         <androidx.cardview.widget.CardView
@@ -156,38 +154,59 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
             android:width="30dp"
             android:text="00:30"
             android:textColor="?attr/colorSecondary"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/seekBar3"
-            app:layout_constraintEnd_toStartOf="@+id/seekBar3"
-            app:layout_constraintTop_toTopOf="@+id/seekBar3" />
+            android:textSize="@dimen/text_x_small"
+            app:layout_constraintBottom_toBottomOf="@+id/music_seekBar"
+            app:layout_constraintEnd_toStartOf="@+id/music_seekBar"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/music_seekBar" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
             android:width="30dp"
             android:text="2:30"
             android:textColor="?attr/colorSecondary"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/seekBar3"
-            app:layout_constraintStart_toEndOf="@+id/seekBar3"
-            app:layout_constraintTop_toTopOf="@+id/seekBar3" />
+            android:textSize="@dimen/text_x_small"
+            app:layout_constraintBottom_toBottomOf="@+id/music_seekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/music_seekBar"
+            app:layout_constraintTop_toTopOf="@+id/music_seekBar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.flaxstudio.musicon.customviews.PlayMusicView
         android:id="@+id/playMusicView"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        app:layout_constraintVertical_bias="0.24000001"
         app:seekBarProgressTrackColor="?attr/colorSecondary"
         app:seekBarTrackColor="?attr/colorAccent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/playImageView"
+        android:layout_width="154dp"
+        android:layout_height="154dp"
+        android:scaleType="centerCrop"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/playMusicView"
+        app:layout_constraintEnd_toEndOf="@+id/playMusicView"
+        app:layout_constraintStart_toStartOf="@+id/playMusicView"
+        app:layout_constraintTop_toTopOf="@+id/playMusicView"
+        app:shapeAppearance="@style/FullCircularImageView"
+        app:srcCompat="@drawable/song_thumb" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

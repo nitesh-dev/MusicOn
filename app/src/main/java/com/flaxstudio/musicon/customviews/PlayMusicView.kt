@@ -7,7 +7,11 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import com.flaxstudio.musicon.R
+import com.flaxstudio.musicon.utils.Vector2
 import com.flaxstudio.musicon.utils.toPx
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 class PlayMusicView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
@@ -18,8 +22,10 @@ class PlayMusicView(context: Context, attrs: AttributeSet) : View(context, attrs
     private var canvasCenter = 0f
     private var playDiscRadius = 0f
     private var seekBarRadius = 0f
-    private var progressPercentage = 45f
+    private var progressValue = 45f                         // max 1000
     private var seekBarProgressAngle = 0f
+    private val seekBarThumbPos = Vector2()
+    private val seekBarThumbRadius = 5.toPx.toFloat()
 
 
     // paints
@@ -36,10 +42,16 @@ class PlayMusicView(context: Context, attrs: AttributeSet) : View(context, attrs
         strokeWidth = 4.toPx.toFloat()
     }
 
+    private val seekBarThumbPaint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.FILL
+    }
+
+
     private val playDiscPaint = Paint().apply {
         isAntiAlias = true
         style = Paint.Style.FILL
-        color = Color.WHITE
+        color = Color.RED
     }
 
     init {
@@ -53,6 +65,7 @@ class PlayMusicView(context: Context, attrs: AttributeSet) : View(context, attrs
         // extracting values
         seekBarTrackPaint.color = typedArray.getColor(R.styleable.PlayMusicView_seekBarTrackColor, defaultSeekBarTrackColor)
         seekBarProgressTrackPaint.color = typedArray.getColor(R.styleable.PlayMusicView_seekBarProgressTrackColor, defaultSeekBarProgressTrackColor)
+        seekBarThumbPaint.color = typedArray.getColor(R.styleable.PlayMusicView_seekBarProgressTrackColor, defaultSeekBarProgressTrackColor)
 
         // TypedArray objects are shared and must be recycled.
         typedArray.recycle()
@@ -73,11 +86,28 @@ class PlayMusicView(context: Context, attrs: AttributeSet) : View(context, attrs
     }
 
     override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-        canvas.drawCircle(canvasCenter, canvasCenter, seekBarRadius, seekBarTrackPaint)
-        canvas.drawCircle(canvasCenter, canvasCenter, playDiscRadius, playDiscPaint)
+        seekBarProgressAngle = progressValue / 1000 * 360
+        calculateThumbPosition()
 
-        seekBarProgressAngle = progressPercentage / 100 * 360
+        canvas.drawCircle(canvasCenter, canvasCenter, seekBarRadius, seekBarTrackPaint)
+        //canvas.drawCircle(canvasCenter, canvasCenter, playDiscRadius, playDiscPaint)
+
         canvas.drawArc(canvasCenter - seekBarRadius , canvasCenter - seekBarRadius, canvasCenter + seekBarRadius, canvasCenter + seekBarRadius, -90f, seekBarProgressAngle, false, seekBarProgressTrackPaint)
+        canvas.drawCircle(seekBarThumbPos.x, seekBarThumbPos.y, seekBarThumbRadius, seekBarThumbPaint)
+    }
+
+    private fun calculateThumbPosition(){
+
+        val angleRad = (90 - seekBarProgressAngle) * PI / 180
+        val x = canvasCenter + seekBarRadius * cos(angleRad).toFloat()
+        val y = canvasCenter - seekBarRadius * sin(angleRad).toFloat()
+        seekBarThumbPos.setValue(x, y)
+    }
+
+
+    // public functions
+    fun setProgressValue(value: Int){
+        progressValue = value.toFloat()
+        invalidate()
     }
 }

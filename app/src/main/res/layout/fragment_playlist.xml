@@ -33,14 +33,12 @@
 
             <ImageButton
                 android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
                 android:background="@android:color/transparent"
-                android:minHeight="48dp"
-                android:minWidth="48dp"
-                android:src="@drawable/icon_arrow_back"
                 android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_arrow_back"
                 app:layout_constraintBottom_toBottomOf="@+id/toolbar"
                 app:layout_constraintStart_toStartOf="@+id/toolbar"
                 app:layout_constraintTop_toTopOf="@+id/toolbar"
@@ -51,25 +49,24 @@
                 android:layout_height="wrap_content"
                 android:text="My Music"
                 android:textColor="@color/pink_700"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:textSize="@dimen/title_bar_text_size"
                 app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-                app:layout_constraintStart_toEndOf="@id/btn_back"
                 app:layout_constraintEnd_toStartOf="@id/btn_sort"
+                app:layout_constraintStart_toEndOf="@id/btn_back"
                 app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
             <ImageButton
                 android:id="@+id/btn_sort"
-                android:layout_width="48dp"
-                android:layout_height = "48dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="20dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/app_name"
+                android:scaleType="center"
                 android:src="@drawable/icon_sort"
                 app:layout_constraintBottom_toBottomOf="@+id/toolbar"
                 app:layout_constraintEnd_toEndOf="@+id/toolbar"
                 app:layout_constraintTop_toTopOf="@+id/toolbar"
-                android:scaleType = "center"
                 app:tint="@color/pink_700" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

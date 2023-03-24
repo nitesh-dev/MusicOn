@@ -20,7 +20,7 @@
 
 
     <style name="Theme_pink" parent="Theme.MusicOn">
-        <item name="colorPrimary">@color/pink_100</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorOnPrimary">@color/pink_700</item>
         <item name="colorSecondary">@color/pink_700</item>
         <item name="colorOnSecondary">@color/pink_100</item>
