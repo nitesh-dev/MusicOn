@@ -12,7 +12,6 @@ import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.flaxstudio.musicon.R
-import com.flaxstudio.musicon.databinding.FragmentHomeBinding
 import com.flaxstudio.musicon.databinding.FragmentMusicBinding
 
 
