@@ -12,6 +12,10 @@
 <!--        <item name="cornerFamily">rounded</item>-->
     </style>
 
+    <style name="CircularImageView_4dp">
+        <item name="cornerSize">4dp</item>
+    </style>
+
     <style name="FullCircularImageView">
         <item name="cornerSize">50%</item>
 
