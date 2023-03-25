@@ -17,6 +17,7 @@
     <!-- Pink theme color - default   -->
     <color name="pink_900">#A90753</color>
     <color name="pink_700">#E83E8E</color>
+    <color name="pink_500">#FF7FBB</color>
     <color name="pink_200">#FFE7F3</color>
     <color name="pink_100">#FFF7FB</color>
     <color name="black_800">#212121</color>
