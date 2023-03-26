@@ -7,15 +7,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.flaxstudio.musicon.R
+import androidx.fragment.app.activityViewModels
+import com.flaxstudio.musicon.ProjectApplication
 import com.flaxstudio.musicon.SettingActivity
 import com.flaxstudio.musicon.databinding.FragmentHomeBinding
+import com.flaxstudio.musicon.viewmodels.MainActivityViewModel
+import com.flaxstudio.musicon.viewmodels.MainActivityViewModelFactory
 
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
+        MainActivityViewModelFactory((requireActivity().application as ProjectApplication).repository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -11,13 +11,21 @@ import android.view.animation.AnimationUtils
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.fragment.app.activityViewModels
+import com.flaxstudio.musicon.ProjectApplication
 import com.flaxstudio.musicon.R
 import com.flaxstudio.musicon.databinding.FragmentMusicBinding
+import com.flaxstudio.musicon.viewmodels.MainActivityViewModel
+import com.flaxstudio.musicon.viewmodels.MainActivityViewModelFactory
 
 
 class MusicFragment : Fragment() {
 
     private lateinit var binding: FragmentMusicBinding
+
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
+        MainActivityViewModelFactory((requireActivity().application as ProjectApplication).repository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
