@@ -19,7 +19,6 @@ class FileManager {
         MediaStore.Audio.Media.DATA
     )
 
-
     // this function will return all type of audio files to implement just call this function
     // from coroutine.
     // Note: required read file permission
@@ -45,8 +44,6 @@ class FileManager {
 
         return audioList
     }
-
-
 
 
     // TODO file system api not completed - affected (FilePickerFragment)
@@ -115,4 +112,21 @@ class FileManager {
 //            // Do something with the file
 //        }
 //    }
+
+
+
+    // --------------------------- Internal file manager ------------------
+
+    fun saveFileInternal(context: Context, jsonFileName: String, content: String){
+        context.openFileOutput(jsonFileName, Context.MODE_PRIVATE).use {
+            it.write(content.toByteArray())
+            it.close()
+        }
+    }
+
+    private fun getFileInternal(context: Context, jsonFileName: String): String{
+        context.openFileInput(jsonFileName).use {
+            return String(it.readBytes())
+        }
+    }
 }

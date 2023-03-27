@@ -3,19 +3,21 @@ package com.flaxstudio.musicon.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.flaxstudio.musicon.rooms.Song
 import com.flaxstudio.musicon.rooms.SongRepository
 import com.flaxstudio.musicon.utils.FileManager
+import com.flaxstudio.musicon.utils.SharedPreferenceManager
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainActivityViewModel(private val repository: SongRepository) : ViewModel() {
 
     // variables
+
+    val spManager = SharedPreferenceManager()             // used for access app settings data & more
+
 
 
     // ---------------------------------------- room methods -----------------------------------
@@ -63,9 +65,7 @@ class MainActivityViewModel(private val repository: SongRepository) : ViewModel(
 
 
 
-
-
-    // ------------------------------------- file system methods ----------------------------
+    // ------------------------------------- file system external methods ----------------------------
     private val fileManager = FileManager()
 
     // getting all songs file from storage and then save it to database
@@ -81,9 +81,6 @@ class MainActivityViewModel(private val repository: SongRepository) : ViewModel(
             callback()
         }
     }
-
-
-
 
 
 

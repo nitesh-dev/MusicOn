@@ -106,24 +106,6 @@
                 android:orientation="horizontal"
                 android:padding="8dp">
 
-                <include
-                    layout="@layout/home_playlist_box"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="8dp" />
-
-                <include
-                    layout="@layout/home_playlist_box"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="8dp" />
-
-                <include
-                    layout="@layout/home_playlist_box"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="8dp" />
-
                 <RelativeLayout
                     android:layout_width="80dp"
                     android:layout_height="80dp"

@@ -21,3 +21,30 @@ class Vector2{
         this.y = y
     }
 }
+
+
+enum class AppTheme{
+    PINK,
+    SHERPA_BLUE,
+    BLUE,
+    RED
+
+}
+fun String.toAppTheme(): AppTheme {
+    var theme = AppTheme.PINK
+    if(this == AppTheme.RED.toString()) theme = AppTheme.RED
+    else if(this == AppTheme.BLUE.toString()) theme = AppTheme.BLUE
+    else if(this == AppTheme.SHERPA_BLUE.toString()) theme = AppTheme.SHERPA_BLUE
+    return theme
+}
+
+
+fun ArrayList<String>.toString(separator: String): String {
+    var tempString = ""
+    for (string in this){
+        tempString += string + separator
+    }
+
+    return tempString
+}
+
