@@ -1,24 +1,22 @@
 package com.flaxstudio.musicon.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.flaxstudio.musicon.R
 
 class PlaylistRecyclerViewAdapter() : RecyclerView.Adapter<PlaylistRecyclerViewAdapter.RecyclerViewViewHolder>() {
 
     inner class RecyclerViewViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView){
-        val songPoster : ImageView = itemView.findViewById(R.id.shapeableImageView)
-        val songName   : TextView  = itemView.findViewById(R.id.textView4)
-        val playlistName : TextView = itemView.findViewById(R.id.textView11)
-        val songDuration : TextView = itemView.findViewById(R.id.textView10)
-        val likeButton : CheckBox  = itemView.findViewById(R.id.checkBox)
+        val songPoster : ImageView = itemView.findViewById(R.id.songIcon)
+        val songName   : TextView  = itemView.findViewById(R.id.songName)
+        val playlistName : TextView = itemView.findViewById(R.id.artistName)
+        val songDuration : TextView = itemView.findViewById(R.id.totalDuration)
+        val likeButton : CheckBox  = itemView.findViewById(R.id.isFav)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {

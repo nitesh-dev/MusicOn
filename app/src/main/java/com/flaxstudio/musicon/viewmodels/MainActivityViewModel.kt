@@ -1,11 +1,13 @@
 package com.flaxstudio.musicon.viewmodels
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.flaxstudio.musicon.rooms.Song
 import com.flaxstudio.musicon.rooms.SongRepository
+import com.flaxstudio.musicon.utils.FileManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -16,14 +18,13 @@ class MainActivityViewModel(private val repository: SongRepository) : ViewModel(
     // variables
 
 
-    // room methods
+    // ---------------------------------------- room methods -----------------------------------
     fun getAllSongs()  = repository.getAllSongs()
     fun getAllFavouriteSongs() = repository.getAllFavouriteSongs()
     fun getAllPlaylistSongs(playlistName: String) = repository.getPlaylistSongs(playlistName)
 
     // limit how much recent songs you needed
-    fun getAllRecentPlayedSongs(limit: Int) = repository.getRecentPlayedSongs(10)
-
+    fun getAllRecentPlayedSongs(limit: Int) = repository.getRecentPlayedSongs(limit)
 
     fun clearAllFavouritesSong(callback: () -> Unit) = viewModelScope.launch(Dispatchers.Default) {
         repository.clearFavouriteSongs()
@@ -58,7 +59,35 @@ class MainActivityViewModel(private val repository: SongRepository) : ViewModel(
     }
 
 
-    // some more methods...
+
+
+
+
+
+
+    // ------------------------------------- file system methods ----------------------------
+    private val fileManager = FileManager()
+
+    // getting all songs file from storage and then save it to database
+    fun saveAllSongsToDatabase(context: Context, callback: () -> Unit) = viewModelScope.launch(Dispatchers.Default) {
+        val audioFiles = fileManager.getAllAudioFiles(context)
+        val time = System.currentTimeMillis()
+
+        for (filePath in audioFiles){
+            val song = Song(0, filePath, false, time, "")
+            repository.insertSong(song)                 // this will add only if row not exist
+        }
+        withContext(Dispatchers.Main){
+            callback()
+        }
+    }
+
+
+
+
+
+
+    // ----------------------------------- common methods ------------------------------------
 }
 
 

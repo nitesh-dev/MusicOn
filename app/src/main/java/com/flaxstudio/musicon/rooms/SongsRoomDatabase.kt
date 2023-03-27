@@ -1,6 +1,7 @@
 package com.flaxstudio.musicon.rooms
 
 import android.content.Context
+import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +10,6 @@ import kotlinx.coroutines.flow.Flow
 @Entity(tableName = "songs_table")
 data class Song(
     @PrimaryKey(autoGenerate = true) var id: Int,
-    @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "path") var path: String,
     @ColumnInfo(name = "is_fav") var isFav: Boolean,
     @ColumnInfo(name = "last_played") var lastPlayed: Long,
@@ -36,14 +36,20 @@ interface SongDao{
     @Query("SELECT * FROM songs_table ORDER BY last_played DESC LIMIT :limit")
     fun getRecentSongs(limit: Int) : Flow<List<Song>>
 
+    @Query("SELECT COUNT(id) FROM songs_table")
+    fun rowCount(): Int
+
+    @Query("SELECT COUNT(id) FROM songs_table WHERE path = :path")
+    fun isSongExist(path: String): Int
+
     @Update
     fun updateSong(song: Song)
 
-    @Insert
-    fun addSong(song: Song)
-
     @Delete
     fun removeSong(song: Song)
+
+    @Insert
+    fun addSong(song: Song)
 }
 
 class SongRepository(private val songDao: SongDao){
@@ -66,6 +72,12 @@ class SongRepository(private val songDao: SongDao){
     }
 
     @WorkerThread
+    suspend fun isTableEmpty(): Boolean{
+        val count = songDao.rowCount()
+        return count == 0
+    }
+
+    @WorkerThread
     suspend fun updateSong(song: Song){
         songDao.updateSong(song)
     }
@@ -82,7 +94,11 @@ class SongRepository(private val songDao: SongDao){
 
     @WorkerThread
     suspend fun insertSong(song: Song){
-        songDao.addSong(song)
+        if(songDao.isSongExist(song.path) == 0){
+            songDao.addSong(song)
+        }else{
+            Log.e("SQL", "skipped - insert")
+        }
     }
 
     @WorkerThread
