@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
     private fun setDataObservers(){
 
         lifecycleScope.launch {
-            mainActivityViewModel.getAllRecentPlayedSongs(10).collect(){songList ->
+            mainActivityViewModel.getAllRecentPlayedSongs(6).collect(){songList ->
                 listAdapter.submitList(songList)
             }
         }

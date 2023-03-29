@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Entity(tableName = "songs_table")
 data class Song(
     @PrimaryKey(autoGenerate = true) var id: Int,
+    @ColumnInfo(name = "file_name") var fileName: String,
     @ColumnInfo(name = "path") var path: String,
     @ColumnInfo(name = "is_fav") var isFav: Boolean,
     @ColumnInfo(name = "last_played") var lastPlayed: Long,

@@ -27,7 +27,7 @@ class RecyclerViewSongListAdapter : ListAdapter<Song, RecyclerViewSongListAdapte
     class CustomViewHolder(itemView: ConstraintLayout) : RecyclerView.ViewHolder(itemView){
 
         fun bind(song: Song) {
-            itemView.findViewById<TextView>(R.id.songName).text = song.path
+            itemView.findViewById<TextView>(R.id.songName).text = song.fileName
         }
 
     }

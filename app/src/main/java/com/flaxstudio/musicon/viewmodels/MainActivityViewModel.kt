@@ -11,6 +11,7 @@ import com.flaxstudio.musicon.utils.SharedPreferenceManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 
 class MainActivityViewModel(private val repository: SongRepository) : ViewModel() {
 
@@ -74,7 +75,8 @@ class MainActivityViewModel(private val repository: SongRepository) : ViewModel(
         val time = System.currentTimeMillis()
 
         for (filePath in audioFiles){
-            val song = Song(0, filePath, false, time, "")
+            val file = File(filePath)
+            val song = Song(0,file.name, filePath, false, time, "")
             repository.insertSong(song)                 // this will add only if row not exist
         }
         withContext(Dispatchers.Main){
