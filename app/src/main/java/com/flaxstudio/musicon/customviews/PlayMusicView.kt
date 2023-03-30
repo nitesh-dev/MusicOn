@@ -22,7 +22,8 @@ class PlayMusicView(context: Context, attrs: AttributeSet) : View(context, attrs
     private var canvasCenter = 0f
     private var playDiscRadius = 0f
     private var seekBarRadius = 0f
-    private var progressValue = 45f                         // max 1000
+    private var progressValue = 45f
+    private var maxProgressValue = 0f
     private var seekBarProgressAngle = 0f
     private val seekBarThumbPos = Vector2()
     private val seekBarThumbRadius = 5.toPx.toFloat()
@@ -86,7 +87,7 @@ class PlayMusicView(context: Context, attrs: AttributeSet) : View(context, attrs
     }
 
     override fun onDraw(canvas: Canvas) {
-        seekBarProgressAngle = progressValue / 1000 * 360
+        seekBarProgressAngle = progressValue / maxProgressValue * 360
         calculateThumbPosition()
 
         canvas.drawCircle(canvasCenter, canvasCenter, seekBarRadius, seekBarTrackPaint)
@@ -106,6 +107,16 @@ class PlayMusicView(context: Context, attrs: AttributeSet) : View(context, attrs
 
 
     // public functions
+    /**
+     * Set the maximum progress value
+     */
+    fun setMaxProgressValue(maxValue: Int){
+        maxProgressValue = maxValue.toFloat()
+    }
+
+    /**
+     * Before setting progress value, you must have to set max progress value
+     */
     fun setProgressValue(value: Int){
         progressValue = value.toFloat()
         invalidate()

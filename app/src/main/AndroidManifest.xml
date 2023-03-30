@@ -26,6 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+
+<!--    Services    -->
+        <service android:name=".services.MusicPlaybackService"/>
     </application>
 
 </manifest>

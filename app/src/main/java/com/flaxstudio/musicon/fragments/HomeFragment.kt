@@ -15,11 +15,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.flaxstudio.musicon.ProjectApplication
+import com.flaxstudio.musicon.R
 import com.flaxstudio.musicon.SettingActivity
 import com.flaxstudio.musicon.adapters.RecyclerViewSongListAdapter
 import com.flaxstudio.musicon.databinding.FragmentHomeBinding
+import com.flaxstudio.musicon.rooms.Song
 import com.flaxstudio.musicon.viewmodels.MainActivityViewModel
 import com.flaxstudio.musicon.viewmodels.MainActivityViewModelFactory
 import kotlinx.coroutines.flow.collect
@@ -76,7 +79,18 @@ class HomeFragment : Fragment() {
     private lateinit var listAdapter: RecyclerViewSongListAdapter
     private fun setupRecentRecyclerView(){
 
-        listAdapter = RecyclerViewSongListAdapter()
+        listAdapter = RecyclerViewSongListAdapter(object : RecyclerViewSongListAdapter.OnItemClickListener{
+            override fun onItemClick(song: Song) {
+                mainActivityViewModel.selectedSong = song
+                mainActivityViewModel.openedPlaylistName = "Recent"
+                openSongFragment()
+            }
+
+            override fun onFavouriteClick(song: Song, isChecked: Boolean) {
+                song.isFav = isChecked
+                mainActivityViewModel.selectedSong = song
+            }
+        })
         binding.recentSongRecyclerView.adapter = listAdapter
         binding.recentSongRecyclerView.layoutManager = LinearLayoutManager(contextApp)
 
@@ -100,7 +114,6 @@ class HomeFragment : Fragment() {
 
 
 
-
     // -----------------------------  read file permission ----------------------------------
 
     // Register permission launcher
@@ -120,5 +133,10 @@ class HomeFragment : Fragment() {
             return true
         }
         return false
+    }
+
+
+    fun openSongFragment(){
+        findNavController().navigate(R.id.action_homeFragment_to_musicFragment)
     }
 }

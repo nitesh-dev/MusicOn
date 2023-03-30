@@ -33,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/backButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
@@ -45,7 +45,7 @@
                 app:tint="?attr/colorOnPrimary" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/playlistName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
@@ -54,7 +54,7 @@
                 android:textSize="@dimen/title_bar_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/toolbar"
-                app:layout_constraintStart_toEndOf="@+id/imageButton"
+                app:layout_constraintStart_toEndOf="@+id/backButton"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5" />
 
@@ -84,13 +84,13 @@
             android:progressBackgroundTint="?attr/colorSecondaryVariant"
             android:progressTint="?attr/colorSecondary"
             android:thumbTint="?attr/colorSecondary"
-            app:layout_constraintEnd_toStartOf="@+id/textView6"
+            app:layout_constraintEnd_toStartOf="@+id/maxDuration"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/playCard" />
+            app:layout_constraintStart_toEndOf="@+id/currentDuration"
+            app:layout_constraintTop_toBottomOf="@+id/playButton" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/playCard"
+            android:id="@+id/playButton"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:backgroundTint="?attr/colorSecondary"
@@ -116,42 +116,42 @@
         </androidx.cardview.widget.CardView>
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/forwardButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:background="#00FFFFFF"
             android:src="@drawable/icon_forward"
-            app:layout_constraintBottom_toBottomOf="@+id/playCard"
-            app:layout_constraintStart_toEndOf="@+id/playCard"
-            app:layout_constraintTop_toTopOf="@+id/playCard"
+            app:layout_constraintBottom_toBottomOf="@+id/playButton"
+            app:layout_constraintStart_toEndOf="@+id/playButton"
+            app:layout_constraintTop_toTopOf="@+id/playButton"
             app:tint="?attr/colorSecondary" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/backwardButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="16dp"
             android:background="#00FFFFFF"
             android:src="@drawable/icon_backward"
-            app:layout_constraintBottom_toBottomOf="@+id/playCard"
-            app:layout_constraintEnd_toStartOf="@+id/playCard"
-            app:layout_constraintTop_toTopOf="@+id/playCard"
+            app:layout_constraintBottom_toBottomOf="@+id/playButton"
+            app:layout_constraintEnd_toStartOf="@+id/playButton"
+            app:layout_constraintTop_toTopOf="@+id/playButton"
             app:tint="?attr/colorSecondary" />
 
         <ImageButton
-            android:id="@+id/imageButton7"
+            android:id="@+id/loopButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="#00FFFFFF"
             android:src="@drawable/icon_loop"
-            app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-            app:layout_constraintTop_toTopOf="@+id/imageButton5"
+            app:layout_constraintBottom_toBottomOf="@+id/backwardButton"
+            app:layout_constraintEnd_toStartOf="@+id/backwardButton"
+            app:layout_constraintTop_toTopOf="@+id/backwardButton"
             app:tint="?attr/colorSecondary" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/currentDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -166,7 +166,7 @@
             app:layout_constraintTop_toTopOf="@+id/music_seekBar" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/maxDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"

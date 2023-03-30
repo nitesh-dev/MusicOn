@@ -1,11 +1,15 @@
 package com.flaxstudio.musicon.viewmodels
 
+import android.app.ActivityManager
 import android.content.Context
+import android.content.Intent
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.flaxstudio.musicon.rooms.Song
 import com.flaxstudio.musicon.rooms.SongRepository
+import com.flaxstudio.musicon.services.MusicPlaybackService
 import com.flaxstudio.musicon.utils.FileManager
 import com.flaxstudio.musicon.utils.SharedPreferenceManager
 import kotlinx.coroutines.Dispatchers
@@ -15,9 +19,11 @@ import java.io.File
 
 class MainActivityViewModel(private val repository: SongRepository) : ViewModel() {
 
-    // variables
-
     val spManager = SharedPreferenceManager()             // used for access app settings data & more
+
+    // the below both variable is used by music fragment to play music
+    lateinit var selectedSong: Song
+    var openedPlaylistName = ""
 
 
 

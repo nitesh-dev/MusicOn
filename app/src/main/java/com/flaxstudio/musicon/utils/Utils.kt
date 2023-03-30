@@ -18,6 +18,11 @@ class Vector2{
     }
 }
 
+enum class PlayType{
+    OneLoop,
+    Shuffle,
+    Linear
+}
 
 enum class AppTheme{
     PINK,
