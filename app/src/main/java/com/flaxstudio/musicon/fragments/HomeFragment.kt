@@ -81,6 +81,12 @@ class HomeFragment : Fragment() {
 
         listAdapter = RecyclerViewSongListAdapter(object : RecyclerViewSongListAdapter.OnItemClickListener{
             override fun onItemClick(song: Song) {
+
+                mainActivityViewModel.clearPlaylist()
+                for (songData in listAdapter.currentList){
+                    mainActivityViewModel.addPlaylistItem(songData.path)
+                }
+
                 mainActivityViewModel.selectedSong = song
                 mainActivityViewModel.openedPlaylistName = "Recent"
                 openSongFragment()

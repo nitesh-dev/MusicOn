@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         app:defaultNavHost="true"
 
-        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintBottom_toTopOf="@+id/bottomMusicTrack"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -22,7 +22,7 @@
         app:navGraph="@navigation/nav_graph" />
 
     <include
-        android:id="@+id/include"
+        android:id="@+id/bottomMusicTrack"
         layout="@layout/play_pause_strip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

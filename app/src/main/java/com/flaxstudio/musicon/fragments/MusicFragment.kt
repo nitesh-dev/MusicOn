@@ -61,6 +61,7 @@ class MusicFragment : Fragment() {
 
         if(musicService != null){
             musicService!!.playNewMusic(mainActivityViewModel.selectedSong.path)
+            musicService!!.setMusicPlaylist(mainActivityViewModel.getPlaylist())
             initialiseData()
         }
     }
@@ -81,6 +82,37 @@ class MusicFragment : Fragment() {
                 musicService!!.setMusicSeek(seekBar.progress * 1000)
             }
         })
+
+
+        binding.playButton.setOnClickListener {
+            if(musicService == null) return@setOnClickListener
+
+            val isChecked = binding.playCheckBox.isChecked
+            binding.playCheckBox.isChecked = !isChecked
+
+            if(!isChecked) musicService!!.resumeMusic() else musicService!!.pauseMusic()
+        }
+
+        binding.forwardButton.setOnClickListener {
+            if(musicService == null) return@setOnClickListener
+            if(musicService!!.forwardMusic()){
+                initialiseData()
+            }else checkForBackwardAndForward()
+
+        }
+
+        binding.backwardButton.setOnClickListener {
+            if(musicService == null) return@setOnClickListener
+            if(musicService!!.backwardMusic()){
+                initialiseData()
+            }else checkForBackwardAndForward()
+        }
+    }
+
+    private fun checkForBackwardAndForward(){
+        if(musicService == null) return
+        if(musicService!!.hasForwardMusic()) binding.forwardButton.alpha = 1f else binding.forwardButton.alpha = 0.6f
+        if(musicService!!.hasBackwardMusic()) binding.backwardButton.alpha = 1f else binding.backwardButton.alpha = 0.6f
     }
 
     private fun initialiseData(){
@@ -93,13 +125,19 @@ class MusicFragment : Fragment() {
         binding.musicSeekBar.max = musicService!!.getMusicDuration() / 1000
         binding.playMusicView.setMaxProgressValue(musicService!!.getMusicDuration() / 1000)
 
+
+        // updating seek bar on every second
         musicJob = lifecycleScope.launch(Dispatchers.Main){
             while (true){
+                if(isMusicSeekingAllowed){
+                    binding.musicSeekBar.progress = musicService!!.getMusicSeek() / 1000
+                }
                 delay(1000)
-                if(!isMusicSeekingAllowed) continue
-                binding.musicSeekBar.progress = musicService!!.getMusicSeek() / 1000
             }
         }
+
+        binding.playCheckBox.isChecked = musicService!!.isMusicPlaying()
+        checkForBackwardAndForward()
     }
 
 

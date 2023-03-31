@@ -50,17 +50,18 @@ class MusicPlaybackService : Service() {
 
 
 
+    // ---------------------------- call back functions --------------------------
+
 
 
     // ----------------------------- some useful methods ----------------------------
-    /**
-     * Play new music at given path
-     * @param path sting file path to play
-     */
+    /** Play new music at given path
+     * @param path sting file path to play*/
     fun playNewMusic(path: String){
 
         try {
             if(currentMusicPlayingPath == path) return          // don't play new music if same music is playing
+            currentMusicPlayingPath = path
 
             val uri = Uri.fromFile(File(path))
             if(player != null && player!!.isPlaying){           // stop player if it is already playing
@@ -77,65 +78,104 @@ class MusicPlaybackService : Service() {
         }
     }
 
+
+    /**resume the music*/
+    fun resumeMusic(){
+        player?.start()
+    }
+
+    /**pause the music*/
+    fun pauseMusic(){
+        player?.pause()
+    }
+
+    /**check whether music is playing or not*/
+    fun isMusicPlaying(): Boolean{
+        if(player == null) return false
+        return player!!.isPlaying
+    }
+
+
+
+    /** It will return music duration
+     * @return music duration in millisecond*/
     fun getMusicDuration(): Int{
         return if(player == null) 0 else player!!.duration
     }
 
+    /**Get player seek position
+     * @return seek in millisecond*/
     fun getMusicSeek(): Int{
         return if(player != null) player!!.currentPosition else 0
     }
 
 
+    /**Set player seek position
+     * @param seekTo in millisecond*/
     fun setMusicSeek(seekTo: Int){
         if(player != null) player!!.seekTo(seekTo)
     }
 
-    /**
-     * resume the music
-     */
-    fun resumeMusic(){
-        player?.start()
-    }
-
-    /**
-     * pause the music
-     */
-    fun pauseMusic(){
-        player?.pause()
-    }
-
-
-    /**
-     * Set player seek position
-     * @param value must be between 0 and 1 inclusive
-     */
-    fun setMusicSeekProgress(value: Float){
-        if(player == null) return
-        val seekValue = (player!!.duration * value).toInt()
-        player!!.seekTo(seekValue)
-    }
-
-    /**
-     * Set playlist array t
-     * @param playType It may be OneLoop | Shuffle | Linear - default value is Linear
-     */
+    /**Set playlist array
+     * @param playType It may be OneLoop | Shuffle | Linear - default value is Linear*/
     fun setMusicPlaylist(musicPaths: ArrayList<String>){
         musicPlaylistPath.clear()
         musicPlaylistPath.addAll(musicPaths)
     }
 
-    /**
-     * Set player music play type
-     * @param playType It may be OneLoop | Shuffle | Linear - default value is Linear
-     */
+    /**Forward 1 music & play it if possible
+     * @return true - if music changed, otherwise false*/
+    fun forwardMusic(): Boolean{
+        if(hasForwardMusic()){
+            val index = musicPlaylistPath.indexOf(currentMusicPlayingPath)
+            playNewMusic(musicPlaylistPath[index + 1])
+            return true
+        }
+        return false
+    }
+
+    /**Backward 1 music & play it if possible
+     * @return true - if music changed, otherwise false*/
+    fun backwardMusic(): Boolean {
+        if(hasBackwardMusic()){
+            val index = musicPlaylistPath.indexOf(currentMusicPlayingPath)
+            playNewMusic(musicPlaylistPath[index - 1])
+            return true
+        }
+
+        return false
+    }
+
+    /**check whether forward possible or not
+     * @return Boolean*/
+    fun hasForwardMusic(): Boolean {
+        val playlistSize = musicPlaylistPath.size
+        if(playlistSize > 0){
+            val index = musicPlaylistPath.indexOf(currentMusicPlayingPath)
+            if(index + 1 < playlistSize) return true
+        }
+        return false
+    }
+
+    /**check whether backward possible or not
+     * @return Boolean*/
+    fun hasBackwardMusic(): Boolean {
+        val playlistSize = musicPlaylistPath.size
+        if(playlistSize > 0){
+            val index = musicPlaylistPath.indexOf(currentMusicPlayingPath)
+            if(index - 1 > -1) return true
+        }
+        return false
+    }
+
+    /** Set player music play type
+     * @param playType It may be OneLoop | Shuffle | Linear - default value is Linear*/
     fun setMusicPlayType(playType: PlayType){
         musicPlayType = playType
     }
 
-    /**
-     * Get service status
-     * @return true | false
-     */
+    /** Get service status
+     * @return true | false*/
     fun isServiceRunning(): Boolean {
         return isServiceRunning
     }
