@@ -1,5 +1,6 @@
 package com.flaxstudio.musicon.adapters
 
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
@@ -32,7 +33,14 @@ class RecyclerViewSongListAdapter(private val itemClickListener: OnItemClickList
     class CustomViewHolder(itemView: ConstraintLayout, private val itemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
 
         fun bind(song: Song) {
-            itemView.findViewById<TextView>(R.id.songName).text = song.fileName
+
+            // moving text
+            itemView.findViewById<TextView>(R.id.songName).apply {
+                text = song.fileName
+                isSingleLine = true
+                ellipsize = TextUtils.TruncateAt.MARQUEE
+                isSelected = true
+            }
 
             itemView.setOnClickListener { itemClickListener.onItemClick(song) }
             itemView.findViewById<CheckBox>(R.id.isFav).setOnCheckedChangeListener { _, isChecked ->

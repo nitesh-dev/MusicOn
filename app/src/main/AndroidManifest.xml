@@ -2,14 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <!-- Required only if your app needs to access audio files
      that other apps created. -->
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" />
 
     <application
 
@@ -41,7 +39,8 @@
 
 
 <!--    Services    -->
-        <service android:name=".services.MusicPlaybackService"/>
+        <service android:name=".services.MusicPlaybackService"
+            android:foregroundServiceType="mediaPlayback"/>
     </application>
 
 </manifest>
