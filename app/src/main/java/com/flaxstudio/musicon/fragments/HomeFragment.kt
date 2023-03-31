@@ -35,6 +35,7 @@ class HomeFragment : Fragment() {
     private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
         MainActivityViewModelFactory((requireActivity().application as ProjectApplication).repository)
     }
+    private val tag = "HomeFragment.kt"
 
     private lateinit var contextApp: Context
 
@@ -98,14 +99,23 @@ class HomeFragment : Fragment() {
             }
         })
         binding.recentSongRecyclerView.adapter = listAdapter
-        binding.recentSongRecyclerView.layoutManager = LinearLayoutManager(contextApp)
+
+
+        // disable vertically scrolling
+        val layoutManager = object:LinearLayoutManager(contextApp){
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
+
+        binding.recentSongRecyclerView.layoutManager = layoutManager
 
     }
 
     private fun setDataObservers(){
 
         lifecycleScope.launch {
-            mainActivityViewModel.getAllRecentPlayedSongs(6).collect(){songList ->
+            mainActivityViewModel.getAllRecentPlayedSongs(10).collect(){songList ->
                 listAdapter.submitList(songList)
             }
         }

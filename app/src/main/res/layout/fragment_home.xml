@@ -144,13 +144,15 @@
             android:textSize="@dimen/main_heading"
             android:textStyle="normal" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.flaxstudio.musicon.customviews.WrapContentRecyclerView
             android:id="@+id/recentSongRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:isScrollContainer="false"
+            android:scrollbars="none"
             tools:listitem="@layout/music_play_track_layout">
 
-        </androidx.recyclerview.widget.RecyclerView>
+        </com.flaxstudio.musicon.customviews.WrapContentRecyclerView>
 
         <TextView
             android:id="@+id/textView9"
