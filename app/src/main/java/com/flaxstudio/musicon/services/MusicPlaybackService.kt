@@ -20,6 +20,7 @@ class MusicPlaybackService : Service() {
     private val tag = "MusicPlaybackService.kt"
 
     // execution of service will start on calling this method
+
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         isServiceRunning = true
         return START_STICKY
@@ -32,7 +33,6 @@ class MusicPlaybackService : Service() {
         // stopping the process
         player?.stop()
         isServiceRunning = false
-
     }
 
 
@@ -50,7 +50,23 @@ class MusicPlaybackService : Service() {
 
 
 
-    // ---------------------------- call back functions --------------------------
+
+
+    // ---------------------------- Broadcast receiver for listening changes  --------------------------
+
+    private fun sendMusicChangeBroadcast(){
+        // Send broadcast to notify other Fragments of the button state change
+        val intent = Intent()
+        intent.action = "android.intent.action.MUSIC_STATE_CHANGE"
+        sendBroadcast(intent)
+    }
+
+    private fun sendPlayPauseBroadcast(){
+        // Send broadcast to notify other Fragments of the button play pause state change
+        val intent = Intent()
+        intent.action = "android.intent.action.MUSIC_PLAY_PAUSE_STATE_CHANGE"
+        sendBroadcast(intent)
+    }
 
 
 
@@ -70,23 +86,32 @@ class MusicPlaybackService : Service() {
             }
             player = MediaPlayer.create(this, uri)
             player!!.isLooping = false
+            Log.e(tag, "--------- ${player!!.isLooping}")
             player!!.start()
+
+            player!!.setOnCompletionListener {
+                sendPlayPauseBroadcast()
+            }
 
         }catch (ex: Exception){
             ex.printStackTrace()
             Log.e(tag, "Unable to play music")
         }
+
+        sendMusicChangeBroadcast()
     }
 
 
     /**resume the music*/
     fun resumeMusic(){
         player?.start()
+        sendPlayPauseBroadcast()
     }
 
     /**pause the music*/
     fun pauseMusic(){
         player?.pause()
+        sendPlayPauseBroadcast()
     }
 
     /**check whether music is playing or not*/
