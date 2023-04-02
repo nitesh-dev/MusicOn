@@ -1,5 +1,5 @@
 # MusicOn
-A music player app with the beautiful ui and performance.
+A music player app with the beautiful ui and performance. It can easily manage your music.
 It can work in background
 
 ### Contribution: On
