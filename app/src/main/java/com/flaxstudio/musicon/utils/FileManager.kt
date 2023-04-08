@@ -1,8 +1,11 @@
 package com.flaxstudio.musicon.utils
 
 import android.content.Context
+import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
+import com.flaxstudio.musicon.rooms.Song
 import java.io.File
 
 class FileManager {
@@ -16,29 +19,57 @@ class FileManager {
         MediaStore.Audio.Media._ID,
         MediaStore.Audio.Media.TITLE,
         MediaStore.Audio.Media.ARTIST,
-        MediaStore.Audio.Media.DATA
+        MediaStore.Audio.Media.DATA,
+        MediaStore.Audio.Media.DURATION,
+        MediaStore.Audio.Media.ALBUM_ID
+
     )
 
     // this function will return all type of audio files to implement just call this function
     // from coroutine.
     // Note: required read file permission
-    fun getAllAudioFiles(context: Context): ArrayList<String> {
+    fun getAllAudioFiles(context: Context): ArrayList<Song> {
 
-        val audioList = ArrayList<String>()
-        val selection = "${MediaStore.Audio.Media.IS_MUSIC} != 0"
+        var selectionArgs: Array<String>? = null
+        val audioList = ArrayList<Song>()
+        val selection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            // API level 29 and higher
+            MediaStore.Audio.Media.IS_MUSIC + " != 0 AND " + MediaStore.Audio.Media.IS_PENDING + " = 0"
+        } else {
+            // Lower than API level 29
+            selectionArgs = arrayOf("1")
+            MediaStore.Audio.Media.IS_MUSIC + " != 0 AND " + MediaStore.Audio.Media.DATA + " IS NOT NULL"
+        }
+
+
         val sortOrder = "${MediaStore.Audio.Media.TITLE} ASC"
         val cursor = context.contentResolver.query(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
             projection,
             selection,
-            null,
+            selectionArgs,
             sortOrder
         )
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                val audioPath = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA))
-                audioList.add(audioPath)
-            }
+        if (cursor != null && cursor.moveToFirst()) {
+            do{
+                val audioPath =
+                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA))
+
+                if(!File(audioPath).exists()){
+                    continue
+                }
+                val title =
+                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE))
+                val artist =
+                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST))
+                val duration =
+                    cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION))
+                val albumId =
+                    cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID))
+
+                Log.e("------------", "$audioPath | $title | $artist | $duration | $albumId")
+                audioList.add(Song(0, title, artist, duration, audioPath, albumId, false, 0, ""))
+            } while (cursor.moveToNext())
             cursor.close()
         }
 
@@ -51,35 +82,35 @@ class FileManager {
     private lateinit var externalStorageDir: File
     private var isFileSystemInitialised = false
 
-    private fun initialiseFileSystem(){
-        if(isFileSystemInitialised) return
+    private fun initialiseFileSystem() {
+        if (isFileSystemInitialised) return
         externalStorageDir = Environment.getExternalStorageDirectory()
     }
 
-    fun listDirectory(path: String){
-       initialiseFileSystem()
+    fun listDirectory(path: String) {
+        initialiseFileSystem()
 
-        if(isFolder(path)){
+        if (isFolder(path)) {
             val file = File(externalStorageDir, path)
-           // return file.listFiles()
+            // return file.listFiles()
         }
     }
 
-    fun isExist(path: String): Boolean{
+    fun isExist(path: String): Boolean {
         initialiseFileSystem()
         val file = File(externalStorageDir, path)
         return file.exists()
     }
 
-    fun isFolder(path: String): Boolean{
+    fun isFolder(path: String): Boolean {
         initialiseFileSystem()
         val file = File(externalStorageDir, path)
         return file.isDirectory
     }
 
-    fun deleteFile(path: String){
+    fun deleteFile(path: String) {
         initialiseFileSystem()
-        if(isExist(path)){
+        if (isExist(path)) {
             val file = File(externalStorageDir, path)
             file.delete()
         }
@@ -114,17 +145,16 @@ class FileManager {
 //    }
 
 
-
     // --------------------------- Internal file manager ------------------
 
-    fun saveFileInternal(context: Context, jsonFileName: String, content: String){
+    fun saveFileInternal(context: Context, jsonFileName: String, content: String) {
         context.openFileOutput(jsonFileName, Context.MODE_PRIVATE).use {
             it.write(content.toByteArray())
             it.close()
         }
     }
 
-    private fun getFileInternal(context: Context, jsonFileName: String): String{
+    private fun getFileInternal(context: Context, jsonFileName: String): String {
         context.openFileInput(jsonFileName).use {
             return String(it.readBytes())
         }

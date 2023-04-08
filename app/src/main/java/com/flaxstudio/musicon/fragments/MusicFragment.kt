@@ -64,7 +64,7 @@ class MusicFragment : Fragment() {
         initialiseListeners()
 
         if (musicService != null) {
-            musicService!!.playNewMusic(mainActivityViewModel.selectedSong.path)
+            musicService!!.playNewMusic(mainActivityViewModel.selectedSong.audioPath)
             musicService!!.setMusicPlaylist(mainActivityViewModel.getPlaylist())
             initialiseData()
         }

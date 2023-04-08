@@ -36,17 +36,38 @@ class RecyclerViewSongListAdapter(private val itemClickListener: OnItemClickList
 
             // moving text
             itemView.findViewById<TextView>(R.id.songName).apply {
-                text = song.fileName
+                text = song.title
                 isSingleLine = true
-                ellipsize = TextUtils.TruncateAt.MARQUEE
-                isSelected = true
+//                ellipsize = TextUtils.TruncateAt.MARQUEE
+//                isSelected = true
             }
+
+            itemView.findViewById<TextView>(R.id.totalDuration).text = song.duration.toString()
+            itemView.findViewById<TextView>(R.id.artistName).text = song.artist
 
             itemView.setOnClickListener { itemClickListener.onItemClick(song) }
             itemView.findViewById<CheckBox>(R.id.isFav).setOnCheckedChangeListener { _, isChecked ->
                 itemClickListener.onFavouriteClick(song, isChecked)
             }
         }
+
+        // Retrieve album art thumbnail from MediaStore
+
+//        val thumbnail: Bitmap =
+//            applicationContext.contentResolver.loadThumbnail(
+//                content-uri, Size(640, 480), null)
+
+
+
+//        Uri albumArtUri = Uri.parse("content://media/external/audio/albumart/" + albumId);
+//        Bitmap albumArtBitmap = null;
+//        try {
+//            InputStream is = context.getContentResolver().openInputStream(albumArtUri);
+//            albumArtBitmap = BitmapFactory.decodeStream(is);
+//            is.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 

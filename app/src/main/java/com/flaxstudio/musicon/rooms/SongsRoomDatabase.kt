@@ -10,15 +10,18 @@ import kotlinx.coroutines.flow.Flow
 @Entity(tableName = "songs_table")
 data class Song(
     @PrimaryKey(autoGenerate = true) var id: Int,
-    @ColumnInfo(name = "file_name") var fileName: String,
-    @ColumnInfo(name = "path") var path: String,
+    @ColumnInfo(name = "title") var title: String,
+    @ColumnInfo(name = "artist") var artist: String,
+    @ColumnInfo(name = "duration") var duration: Long,
+    @ColumnInfo(name = "audio_path") var audioPath: String,
+    @ColumnInfo(name = "album_id") var albumId: Long,
     @ColumnInfo(name = "is_fav") var isFav: Boolean,
     @ColumnInfo(name = "last_played") var lastPlayed: Long,
     @ColumnInfo(name = "playlist") var playlist: String
 )
 
 @Dao
-interface SongDao{
+interface SongDao {
     @Query("SELECT * FROM songs_table")
     fun getAllSongs(): Flow<List<Song>>
 
@@ -35,12 +38,12 @@ interface SongDao{
     fun clearFavouritesSongs()
 
     @Query("SELECT * FROM songs_table ORDER BY last_played DESC LIMIT :limit")
-    fun getRecentSongs(limit: Int) : Flow<List<Song>>
+    fun getRecentSongs(limit: Int): Flow<List<Song>>
 
     @Query("SELECT COUNT(id) FROM songs_table")
     fun rowCount(): Int
 
-    @Query("SELECT COUNT(id) FROM songs_table WHERE path = :path")
+    @Query("SELECT COUNT(id) FROM songs_table WHERE audio_path = :path")
     fun isSongExist(path: String): Int
 
     @Update
@@ -53,7 +56,7 @@ interface SongDao{
     fun addSong(song: Song)
 }
 
-class SongRepository(private val songDao: SongDao){
+class SongRepository(private val songDao: SongDao) {
 
 
     fun getAllSongs(): Flow<List<Song>> {
@@ -73,37 +76,37 @@ class SongRepository(private val songDao: SongDao){
     }
 
     @WorkerThread
-    suspend fun isTableEmpty(): Boolean{
+    suspend fun isTableEmpty(): Boolean {
         val count = songDao.rowCount()
         return count == 0
     }
 
     @WorkerThread
-    suspend fun updateSong(song: Song){
+    suspend fun updateSong(song: Song) {
         songDao.updateSong(song)
     }
 
     @WorkerThread
-    suspend fun clearPlaylistSongs(playlistName: String){
+    suspend fun clearPlaylistSongs(playlistName: String) {
         songDao.clearPlaylistSongs(playlistName)
     }
 
     @WorkerThread
-    suspend fun clearFavouriteSongs(){
+    suspend fun clearFavouriteSongs() {
         songDao.clearFavouritesSongs()
     }
 
     @WorkerThread
-    suspend fun insertSong(song: Song){
-        if(songDao.isSongExist(song.path) == 0){
+    suspend fun insertSong(song: Song) {
+        if (songDao.isSongExist(song.audioPath) == 0) {
             songDao.addSong(song)
-        }else{
+        } else {
             Log.e("SQL", "skipped - insert")
         }
     }
 
     @WorkerThread
-    suspend fun removeSong(song: Song){
+    suspend fun removeSong(song: Song) {
         songDao.removeSong(song)
     }
 
@@ -112,6 +115,7 @@ class SongRepository(private val songDao: SongDao){
 @Database(entities = [Song::class], version = 1, exportSchema = false)
 abstract class AppSongDatabase : RoomDatabase() {
     abstract fun songDao(): SongDao
+
     companion object {
         // Singleton prevents multiple instances of database opening at the
         // same time.

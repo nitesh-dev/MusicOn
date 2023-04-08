@@ -93,9 +93,8 @@ class MainActivityViewModel(private val repository: SongRepository) : ViewModel(
         val audioFiles = fileManager.getAllAudioFiles(context)
         val time = System.currentTimeMillis()
 
-        for (filePath in audioFiles){
-            val file = File(filePath)
-            val song = Song(0,file.name, filePath, false, time, "")
+        for (song in audioFiles){
+            song.lastPlayed = time
             repository.insertSong(song)                 // this will add only if row not exist
         }
         withContext(Dispatchers.Main){
