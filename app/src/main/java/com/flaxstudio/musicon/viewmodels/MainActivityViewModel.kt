@@ -24,17 +24,17 @@ class MainActivityViewModel(private val repository: SongRepository) : ViewModel(
     // the below both variable is used by music fragment to play music
     lateinit var selectedSong: Song
     var openedPlaylistName = ""
-    private var playlistAllSongs: ArrayList<String> = ArrayList()
+    private var playlistAllSongs: ArrayList<Song> = ArrayList()
 
 
     fun clearPlaylist(){
         playlistAllSongs.clear()
     }
-    fun addPlaylistItem(path: String){
-        playlistAllSongs.add(path)
+    fun addPlaylistItem(song: Song){
+        playlistAllSongs.add(song)
     }
 
-    fun getPlaylist(): ArrayList<String>{
+    fun getPlaylist(): ArrayList<Song>{
         return playlistAllSongs
     }
 

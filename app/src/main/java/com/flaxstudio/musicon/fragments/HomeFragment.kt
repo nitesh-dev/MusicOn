@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
 
                 mainActivityViewModel.clearPlaylist()
                 for (songData in listAdapter.currentList){
-                    mainActivityViewModel.addPlaylistItem(songData.audioPath)
+                    mainActivityViewModel.addPlaylistItem(songData)
                 }
 
                 mainActivityViewModel.selectedSong = song

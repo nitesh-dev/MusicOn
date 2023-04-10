@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
@@ -64,9 +65,11 @@ class MusicFragment : Fragment() {
         initialiseListeners()
 
         if (musicService != null) {
-            musicService!!.playNewMusic(mainActivityViewModel.selectedSong.audioPath)
+            musicService!!.playNewMusic(mainActivityViewModel.selectedSong)
             musicService!!.setMusicPlaylist(mainActivityViewModel.getPlaylist())
             initialiseData()
+
+            Toast.makeText(requireContext(), "${mainActivityViewModel.getPlaylist().size}", Toast.LENGTH_SHORT).show()
         }
     }
 
