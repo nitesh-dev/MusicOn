@@ -80,7 +80,7 @@ class HomeFragment : Fragment() {
     private lateinit var listAdapter: RecyclerViewSongListAdapter
     private fun setupRecentRecyclerView(){
 
-        listAdapter = RecyclerViewSongListAdapter(object : RecyclerViewSongListAdapter.OnItemClickListener{
+        listAdapter = RecyclerViewSongListAdapter(contextApp, lifecycleScope,object : RecyclerViewSongListAdapter.OnItemClickListener{
             override fun onItemClick(song: Song) {
 
                 mainActivityViewModel.clearPlaylist()

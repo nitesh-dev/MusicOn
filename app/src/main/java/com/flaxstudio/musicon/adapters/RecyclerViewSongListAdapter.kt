@@ -1,18 +1,31 @@
 package com.flaxstudio.musicon.adapters
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.media.MediaMetadataRetriever
+import android.net.Uri
+import android.os.Build
 import android.text.TextUtils
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.flaxstudio.musicon.R
 import com.flaxstudio.musicon.rooms.Song
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class RecyclerViewSongListAdapter(private val itemClickListener: OnItemClickListener) : ListAdapter<Song, RecyclerViewSongListAdapter.CustomViewHolder>(SongItemDiffCallback()) {
+class RecyclerViewSongListAdapter(private val contextApp: Context , private val coroutineScope: CoroutineScope,private val itemClickListener: OnItemClickListener) : ListAdapter<Song, RecyclerViewSongListAdapter.CustomViewHolder>(SongItemDiffCallback()) {
     interface OnItemClickListener {
         fun onItemClick(song: Song)
         fun onFavouriteClick(song: Song, isChecked: Boolean)
@@ -25,12 +38,13 @@ class RecyclerViewSongListAdapter(private val itemClickListener: OnItemClickList
         return CustomViewHolder(view, itemClickListener)
     }
 
+
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
 
-    class CustomViewHolder(itemView: ConstraintLayout, private val itemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
+    inner class CustomViewHolder(itemView: ConstraintLayout, private val itemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
 
         fun bind(song: Song) {
 
@@ -44,6 +58,7 @@ class RecyclerViewSongListAdapter(private val itemClickListener: OnItemClickList
 
             itemView.findViewById<TextView>(R.id.totalDuration).text = song.duration.toString()
             itemView.findViewById<TextView>(R.id.artistName).text = song.artist
+
 
             itemView.setOnClickListener { itemClickListener.onItemClick(song) }
             itemView.findViewById<CheckBox>(R.id.isFav).setOnCheckedChangeListener { _, isChecked ->
